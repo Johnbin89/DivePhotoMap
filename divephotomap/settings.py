@@ -40,8 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'markers.app.MarkersConfig',
-    'accounts.app.AccountsConfig'
+    'markers.apps.MarkersConfig',
+    'accounts.apps.AccountsConfig'
 ]
 
 REST_FRAMEWORK = {
@@ -89,7 +89,7 @@ WSGI_APPLICATION = 'divephotomap.wsgi.application'
 DATABASES = {
     'default': config(
         'DATABASE_URL',
-        default='sqlite:///' + BASE_DIR.child('db.sqlite3'),
+        default='sqlite:///' + BASE_DIR.joinpath('db.sqlite3').as_posix(),
         cast=db_url
     )
 }

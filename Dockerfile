@@ -37,18 +37,18 @@ WORKDIR /code/
 ADD . /code/
 
 # uWSGI will listen on this port
-EXPOSE 8000
+EXPOSE 8001
 
 # Add any static environment variables needed by Django or your settings file here:
-ENV DJANGO_SETTINGS_MODULE=certwebapp.settings
+ENV DJANGO_SETTINGS_MODULE=divephotomap.settings
 
 # Call collectstatic (customize the following line with the minimal environment variables needed for manage.py to run):
 
 # Tell uWSGI where to find your wsgi file (change this):
-ENV UWSGI_WSGI_FILE=certwebapp/wsgi.py
+ENV UWSGI_WSGI_FILE=divephotomap/wsgi.py
 
 # Base uWSGI configuration (you shouldn't need to change these):
-ENV UWSGI_HTTP=:8000 UWSGI_MASTER=1 UWSGI_HTTP_AUTO_CHUNKED=1 UWSGI_HTTP_KEEPALIVE=1 UWSGI_LAZY_APPS=1 UWSGI_WSGI_ENV_BEHAVIOR=holy
+ENV UWSGI_HTTP=:8001 UWSGI_MASTER=1 UWSGI_HTTP_AUTO_CHUNKED=1 UWSGI_HTTP_KEEPALIVE=1 UWSGI_LAZY_APPS=1 UWSGI_WSGI_ENV_BEHAVIOR=holy
 
 # Number of uWSGI workers and threads per worker (customize as needed):
 ENV UWSGI_WORKERS=1 UWSGI_THREADS=1
@@ -69,8 +69,8 @@ ENTRYPOINT ["/code/docker-entrypoint.sh"]
 CMD ["uwsgi", "--show-config"]
 
 #Start Daphne
-#CMD ["daphne", "certwebapp.asgi:application", "--port", "8000", "-b", "0.0.0.0"]
+#CMD ["daphne", "divephotomap.asgi:application", "--port", "8001", "-b", "0.0.0.0"]
 
 
 #Start Gunicorn
-#CMD ["gunicorn", "--access-logfile", "--error-logfile" ,"--bind", ":8000", "-k", "uvicorn.workers.UvicornWorker", "certwebapp.asgi:application" ]
+#CMD ["gunicorn", "--access-logfile", "--error-logfile" ,"--bind", ":8001", "-k", "uvicorn.workers.UvicornWorker", "divephotomap.asgi:application" ]

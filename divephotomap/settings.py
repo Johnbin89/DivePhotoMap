@@ -13,6 +13,9 @@ from decouple import config, Csv
 from pathlib import Path
 
 from dj_database_url import parse as db_url
+import django.core.management.commands.runserver as runserver
+
+runserver.Command.default_port = config('DEVELOPMENT_PORT', default = "8001")
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 

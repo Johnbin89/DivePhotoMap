@@ -19,11 +19,12 @@ from django.urls import path, include
 from rest_framework import routers
 from accounts import views as accounts_views
 
-router = routers.DefaultRouter()
-router.register(r'users', accounts_views.UserViewSet)
+#router = routers.DefaultRouter()
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    #path('', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path(r'auth/', include('djoser.urls')),
+    path(r'auth/', include('djoser.urls.jwt')),
 ]

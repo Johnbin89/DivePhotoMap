@@ -1,6 +1,7 @@
 from rest_framework import permissions
 
-#Custom permission for reference. djoser package will be used.
+#Custom permission for reference. djoser package will be used. 
+# ATTENTION: Object permissions can be used only for single object returns. List objects needs to modify queryset in view.
 class IsOwner(permissions.BasePermission):
     """
     Object-level permission to only allow owners of an object to view/edit it.

@@ -28,5 +28,6 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path(r'auth/', include('djoser.urls')),
     path(r'auth/', include('djoser.urls.jwt')),
+    path(r"auth/", include("djoser.social.urls")),
     path("auth/accounts/logout/", accounts_views.LogoutView.as_view()),
 ]

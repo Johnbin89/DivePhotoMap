@@ -17,7 +17,7 @@ class PublicMarkerList(generics.ListAPIView):
 class UserMarkers(generics.ListCreateAPIView):
     serializer_class = MarkerSerializer
     authentication_classes = [JWTAuthentication]
-    permission_classes=[IsOwner, IsAuthenticated]
+    permission_classes=[IsAuthenticated]
 
     def get_queryset(self):
         user = self.request.user
@@ -25,10 +25,8 @@ class UserMarkers(generics.ListCreateAPIView):
 
 
 class UserMarkersDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Marker.objects.all()
     serializer_class = MarkerSerializer
     authentication_classes = [JWTAuthentication]
+    #IsOwner permission works for single objects.
     permission_classes=[IsOwner, IsAuthenticated]
-
-    def get_queryset(self):
-        user = self.request.user
-        return Marker.objects.filter(owner=user)

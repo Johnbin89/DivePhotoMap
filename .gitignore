@@ -113,9 +113,10 @@ GitHub.sublime-settings
 # Visual Studio Code # 
 .vscode/*
 .history
-
+*.csv
 #script
 populateDB.py
+
 
 #filepond temp
 /filepond-temp-uploads

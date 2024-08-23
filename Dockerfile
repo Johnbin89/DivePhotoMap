@@ -3,18 +3,19 @@ ARG PYTHON_VERSION=3.12-slim-bookworm
 FROM python:${PYTHON_VERSION} as builder
 ENV PYTHONUNBUFFERED=1
 
-WORKDIR /wheels
 
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends build-essential curl libpq-dev libpython3-dev gcc \
+  && rm -rf /var/lib/apt/lists/* /usr/share/doc /usr/share/man \
+  && apt-get clean
+
+WORKDIR /wheels
 COPY requirements.txt .
 RUN pip wheel -r requirements.txt --disable-pip-version-check
 
 FROM python:${PYTHON_VERSION}
 ENV PYTHONUNBUFFERED=1
 
-RUN apt-get update \
-  && apt-get install -y --no-install-recommends build-essential curl libpq-dev libpython3-dev gcc \
-  && rm -rf /var/lib/apt/lists/* /usr/share/doc /usr/share/man \
-  && apt-get clean
 
 COPY --from=builder /wheels /wheels
 RUN pip install \

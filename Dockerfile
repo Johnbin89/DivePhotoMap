@@ -11,6 +11,11 @@ RUN pip wheel -r requirements.txt --disable-pip-version-check
 FROM python:${PYTHON_VERSION}
 ENV PYTHONUNBUFFERED=1
 
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends build-essential curl libpq-dev \
+  && rm -rf /var/lib/apt/lists/* /usr/share/doc /usr/share/man \
+  && apt-get clean
+
 COPY --from=builder /wheels /wheels
 RUN pip install \
         --no-cache-dir \

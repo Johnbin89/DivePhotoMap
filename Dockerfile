@@ -2,10 +2,11 @@ ARG PYTHON_VERSION=3.12-slim-bookworm
 
 FROM python:${PYTHON_VERSION} as builder
 ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE 1
 
 
 RUN apt-get update \
-  && apt-get install -y --no-install-recommends build-essential curl libpq-dev libpython3-dev gcc \
+  && apt-get install -y --no-install-recommends build-essential libpq-dev \
   && rm -rf /var/lib/apt/lists/* /usr/share/doc /usr/share/man \
   && apt-get clean
 
@@ -16,6 +17,15 @@ RUN pip wheel -r requirements.txt --disable-pip-version-check
 FROM python:${PYTHON_VERSION}
 ENV PYTHONUNBUFFERED=1
 
+
+# install required runtime dependencies, and cleanup cached files for a smaller layer
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        # psycopg2 runtime dependencies
+        libpq15 \
+  # cleaning up unused files
+  && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
+  && rm -rf /var/lib/apt/lists/*
 
 COPY --from=builder /wheels /wheels
 RUN pip install \

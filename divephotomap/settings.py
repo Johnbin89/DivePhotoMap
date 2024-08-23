@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-from django.core.management.utils import get_random_secret_key
+from django.core.management.utils import get_random_secret_key  # noqa: E402
 SECRET_KEY = config('SECRET_KEY', default=get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -75,7 +75,7 @@ DJOSER = {
     "ACTIVATION_URL": "activate/{uid}/{token}",
     #"SEND_ACTIVATION_EMAIL": True,
     "SOCIAL_AUTH_TOKEN_STRATEGY": "djoser.social.token.jwt.TokenStrategy",
-    "SOCIAL_AUTH_ALLOWED_REDIRECT_URIS": ["http://localhost:3000", "http://127.0.0.1:3000"],
+    "SOCIAL_AUTH_ALLOWED_REDIRECT_URIS": ["http://localhost:3000", "http://127.0.0.1:3000", 'https://divemap.jbin.me/'],
 }
 
 

@@ -12,7 +12,7 @@ FROM python:${PYTHON_VERSION}
 ENV PYTHONUNBUFFERED=1
 
 RUN apt-get update \
-  && apt-get install -y --no-install-recommends build-essential curl libpq-dev python3-dev gcc \
+  && apt-get install -y --no-install-recommends build-essential curl libpq-dev python3.12-dev gcc \
   && rm -rf /var/lib/apt/lists/* /usr/share/doc /usr/share/man \
   && apt-get clean
 

@@ -5,17 +5,11 @@ ENV PYTHONUNBUFFERED=1
 
 WORKDIR /wheels
 
-RUN apk add --update --no-cache \
-    postgresql-dev
 COPY requirements.txt .
 RUN pip wheel -r requirements.txt --disable-pip-version-check
 
 FROM python:${PYTHON_VERSION}
 ENV PYTHONUNBUFFERED=1
-
-RUN apk add --update --no-cache \
-    libpq \
-    postgresql-client
 
 COPY --from=builder /wheels /wheels
 RUN pip install \

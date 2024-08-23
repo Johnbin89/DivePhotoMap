@@ -26,7 +26,7 @@ RUN pip install \
 
 WORKDIR /app
 
-COPY . ./
+ADD . /app/
 EXPOSE 8001
 
 

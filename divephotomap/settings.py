@@ -92,7 +92,7 @@ if DEBUG:
         "http://127.0.0.1:3000",
     ]
 else:
-    CORS_ORIGIN_WHITELIST = config("CORS_ORIGIN_WHITELIST").split(',')
+    CORS_ORIGIN_WHITELIST = config("CORS_ORIGIN_WHITELIST")
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

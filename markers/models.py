@@ -16,6 +16,7 @@ class DiveSpot(models.Model):
         ('Reef', 'Reef'),
         ('Wall', 'Wall'),
         ('Wreck', 'Wreck'),
+        ('Aircraft', 'Aircraft'),
         ('Cave', 'Cave'),
         ('Cavern', 'Cavern'),
         ('Open Water', 'Open Water'),

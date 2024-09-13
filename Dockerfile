@@ -42,7 +42,7 @@ EXPOSE 8001
 
 
 ENV DJANGO_SETTINGS_MODULE=divephotomap.settings
-
+ENV DJANGO_MANAGEPY_MIGRATE=on
 # Tell uWSGI where to find your wsgi file (change this):
 ENV UWSGI_WSGI_FILE=divephotomap/wsgi.py
 

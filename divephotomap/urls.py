@@ -30,4 +30,5 @@ urlpatterns = [
     path(r'auth/', include('djoser.urls.jwt')),
     path(r"auth/", include("djoser.social.urls")),
     path("auth/accounts/logout/", accounts_views.LogoutView.as_view()),
+    path('', include('django_prometheus.urls')),
 ]

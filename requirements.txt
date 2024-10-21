@@ -7,12 +7,14 @@ defusedxml==0.8.0rc2
 dj-database-url==2.2.0
 Django==5.0.6
 django-cors-headers==4.4.0
+django-prometheus==2.3.1
 django-templated-mail==1.1.1
 djangorestframework==3.15.1
 djangorestframework-simplejwt==5.3.1
 djoser==2.2.3
 idna==3.7
 oauthlib==3.2.2
+prometheus_client==0.21.0
 psycopg==3.1.19
 pycparser==2.22
 PyJWT==2.8.0

@@ -142,7 +142,7 @@ DATABASES = {
                     cast=db_url)
 }
 
-DATABASES['default'].ENGINE =  "django_prometheus.db.backends.postgresql" if config("DATABASE_URL") else "django_prometheus.db.backends.sqlite3"
+DATABASES['default']['ENGINE'] =  "django_prometheus.db.backends.postgresql" if config("DATABASE_URL") else "django_prometheus.db.backends.sqlite3"
 
 AUTH_USER_MODEL = 'accounts.User'
 

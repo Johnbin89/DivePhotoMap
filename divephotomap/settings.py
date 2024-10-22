@@ -136,14 +136,13 @@ WSGI_APPLICATION = 'divephotomap.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        "ENGINE": "django_prometheus.db.backends.postgresql" if config("DATABASE_URL") else "django_prometheus.db.backends.sqlite3",
-        "NAME": config(
+    'default': config(
                     'DATABASE_URL',
                     default='sqlite:///' + BASE_DIR.joinpath('db.sqlite3').as_posix(),
-                    cast=db_url),
-        }
+                    cast=db_url)
 }
+
+DATABASES['default'].ENGINE =  "django_prometheus.db.backends.postgresql" if config("DATABASE_URL") else "django_prometheus.db.backends.sqlite3"
 
 AUTH_USER_MODEL = 'accounts.User'
 

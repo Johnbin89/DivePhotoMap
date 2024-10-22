@@ -96,6 +96,7 @@ else:
     CORS_ORIGIN_WHITELIST = config("CORS_ORIGIN_WHITELIST").split(',')
 
 MIDDLEWARE = [
+    'django_prometheus.middleware.PrometheusBeforeMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     "corsheaders.middleware.CorsMiddleware",
@@ -105,7 +106,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django_prometheus.middleware.PrometheusBeforeMiddleware',
     'django_prometheus.middleware.PrometheusAfterMiddleware',
 ]
 
@@ -136,11 +136,13 @@ WSGI_APPLICATION = 'divephotomap.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': config(
-        'DATABASE_URL',
-        default='sqlite:///' + BASE_DIR.joinpath('db.sqlite3').as_posix(),
-        cast=db_url
-    )
+    'default': {
+        "ENGINE": "django_prometheus.db.backends.postgresql" if config("DATABASE_URL") else "django_prometheus.db.backends.sqlite3",
+        "NAME": config(
+                    'DATABASE_URL',
+                    default='sqlite:///' + BASE_DIR.joinpath('db.sqlite3').as_posix(),
+                    cast=db_url),
+        }
 }
 
 AUTH_USER_MODEL = 'accounts.User'
